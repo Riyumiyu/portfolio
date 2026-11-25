@@ -161,3 +161,10 @@ function follow() {
 }
 addEventListener("scroll", follow, {passive:true});
 addEventListener("resize", follow); addEventListener("load", follow); follow();
+
+// discourage saving pictures and peeking at the page code (a deterrent, not a lock)
+["contextmenu", "dragstart"].forEach(type => document.addEventListener(type, e => e.preventDefault()));
+addEventListener("keydown", e => {
+  const k = e.key.toLowerCase(), cmd = e.ctrlKey || e.metaKey;
+  if (k === "f12" || (cmd && (k === "u" || k === "s")) || (cmd && (e.shiftKey || e.altKey) && ["i", "j", "c"].includes(k))) e.preventDefault();
+});
