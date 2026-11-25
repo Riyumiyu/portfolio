@@ -254,6 +254,11 @@ function stage(el, source) {
         ? act("peek", "good evening! 🌙", "✨")
         : act("wave", "good morning! ☀️", "✨");
     }
+    if (e.target.closest(".sun") && document.documentElement.classList.contains("night")) {
+      const n = turns.get("moon") ?? 0;
+      turns.set("moon", n + 1);
+      return act(pick(["peek", "wave"], n), pick(["hi moony Yas 🌙", "so sleepy... 😴", "pretty moonlight ✨"], n), "✨");
+    }
     const hit = reactions.find(([sel]) => e.target.closest(sel));
     if (!hit) return;
     const [sel, moves, lines, emoji] = hit, n = turns.get(sel) ?? 0;
