@@ -168,3 +168,20 @@ addEventListener("keydown", e => {
   const k = e.key.toLowerCase(), cmd = e.ctrlKey || e.metaKey;
   if (k === "f12" || (cmd && (k === "u" || k === "s")) || (cmd && (e.shiftKey || e.altKey) && ["i", "j", "c"].includes(k))) e.preventDefault();
 });
+
+// once a picture arrives, drop the placeholder strawberry behind it
+const loadedTile = img => img.closest?.(".tile")?.classList.add("has-picture");
+document.addEventListener("load", e => e.target.tagName === "IMG" && loadedTile(e.target), true);
+document.querySelectorAll(".tile img").forEach(img => img.complete && img.naturalWidth && loadedTile(img));
+
+// phones have no cursor, so a tap gets its own strawberry (a swipe cancels the pointer and shows nothing)
+document.addEventListener("pointerup", e => {
+  if (e.pointerType !== "touch" || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const tap = Object.assign(document.createElement("span"), {className: "tap"});
+  tap.setAttribute("aria-hidden", "true");
+  tap.append(Object.assign(new Image(), {src: "media/strawberry-pink.webp", alt: ""}));
+  tap.style.left = e.clientX + "px";
+  tap.style.top = e.clientY + "px";
+  document.body.append(tap);
+  setTimeout(() => tap.remove(), 650);
+});

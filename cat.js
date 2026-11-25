@@ -240,6 +240,8 @@ function stage(el, source) {
     [".tags span", ["nod", "wiggle"], ["she's good at that", "yep, yep!", "skill unlocked ✨"], "✨"],
     [".award", ["clap", "cheer"], ["wow, a winner!", "so proud!"], "🏅"],
     [".line li", ["nod", "bow"], ["experience! 💼", "hard worker"], "💼"],
+    ["#artworks .tile", ["clap", "cheer"], ["so pretty! 🎨", "she drew that! ✨", "love those colours!", "art wall favourite 💗"], "🎨"],
+    [".anims .tile", ["dance", "bounce"], ["it moves! 🎞️", "she animated that!"], "🎞️"],
     [".tile", ["peek", "bounce"], ["ooh, nice one!", "she made that! ✨", "play it again!"], "🍓"],
     ["h1, h2", ["wiggle", "bow"], ["that's the title!", "nice font, right?"], "💗"],
     [".toolbox", ["cheer", "dance"], ["my AI toolkit! 🤖", "so many tools!"], "🤖"],

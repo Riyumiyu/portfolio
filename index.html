@@ -6,7 +6,7 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yasmien Gayao - Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Patrick+Hand&family=Nunito:wght@400;600;700;800;900&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Pacifico&family=Patrick+Hand&family=Nunito:wght@400;600;700;800;900&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 <style>
 :root{--ink:#4a1830;--muted:#8a5a6c;--bg:#fff6f4;--card:#fff;--line:#ffdada;--purple:#c90a56;--pink:#ff7d9c;--blue:#4caf50;--grad:linear-gradient(100deg,#c90a56,#ff6f91,#e0447a,#c90a56)}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -380,6 +380,53 @@ body{-webkit-touch-callout:none}
 .petal.leaf svg{display:block;filter:drop-shadow(0 2px 3px rgba(30,80,30,.25))}
 .night .petal.leaf svg{filter:brightness(.75)}
 @media(prefers-reduced-motion:reduce){.petal{display:none}}
+#artworks .tile.has-picture{background-image:none}
+.where{font:1.25rem "Patrick Hand",cursive;color:var(--ink);margin:-8px 0 12px}
+.night .where{color:#fff}
+/* ---------- liquid glass lettering ---------- */
+#about .intro{z-index:3;width:min(520px,94%)}
+#about .hello,#about .name{display:block;width:max-content;max-width:100%;margin:0 auto;padding:.04em .12em;background:none!important;
+  font-family:Pacifico,Caveat,cursive!important;font-weight:400;letter-spacing:.01em;line-height:1.35;
+  color:#000!important;-webkit-text-fill-color:#000;animation:jelly 6s ease-in-out infinite!important}
+#about .hello{font-size:clamp(2.2rem,4.8vw,3.5rem)!important;filter:url(#glass-ink)}
+#about .name{font-size:clamp(3.6rem,8vw,6rem)!important;filter:url(#glass-pink)}
+.night #about .hello,.night #about .name{filter:url(#glass-night)}
+#about .intro .name{-webkit-text-stroke:.055em #000}
+#about .intro .hello{-webkit-text-stroke:.05em #000}
+@media(max-width:720px){#about .hello{filter:url(#glass-ink-sm)}#about .name{filter:url(#glass-pink-sm)}
+.night #about .hello,.night #about .name{filter:url(#glass-night-sm)}#about .intro .name{-webkit-text-stroke:.025em #000}#about .intro .hello{-webkit-text-stroke:.012em #000}}
+@keyframes jelly{0%,86%,100%{scale:1 1}90%{scale:1.04 .96}94%{scale:.98 1.03}}
+@media(max-width:720px){#about .hello{font-size:2.2rem!important}#about .name{font-size:3.6rem!important}}
+#about .intro .btn{background:linear-gradient(180deg,rgba(255,255,255,.78),rgba(255,255,255,.38));
+  -webkit-backdrop-filter:blur(10px) saturate(180%);backdrop-filter:blur(10px) saturate(180%);
+  border:1px solid rgba(255,255,255,.9);color:var(--ink);
+  box-shadow:0 8px 22px rgba(74,24,48,.2),inset 0 1.5px 0 #fff,inset 0 -6px 12px rgba(255,170,195,.35)}
+#about .intro .btn:hover{transform:translateY(-2px) scale(1.04)}
+.night #about .intro .btn{background:linear-gradient(180deg,rgba(255,255,255,.26),rgba(255,255,255,.1));border-color:rgba(255,255,255,.45);color:#fff;
+  box-shadow:0 8px 22px rgba(0,0,0,.35),inset 0 1.5px 0 rgba(255,255,255,.5)}
+/* ---------- strawberry cursor + glow ---------- */
+@media(hover:hover) and (pointer:fine){
+  html,body{cursor:url(media/cursor.png) 8 6,auto}
+  a,button,summary,.jump,.play,.stage canvas,.tags span,.award,.card,.sun,.tile,a *,button *,summary *,.jump *,.play *,.stage canvas *,.tags span *,.award *,.card *,.sun *,.tile *{cursor:url(media/cursor-day.png) 8 6,pointer!important}
+  .night a,.night button,.night summary,.night .jump,.night .play,.night .stage canvas,.night .tags span,.night .award,.night .card,.night .sun,.night .tile,.night a *,.night button *,.night summary *,.night .jump *,.night .play *,.night .stage canvas *,.night .tags span *,.night .award *,.night .card *,.night .sun *,.night .tile *{cursor:url(media/cursor-night.png) 8 6,pointer!important}
+  #glow{display:block!important;position:fixed;z-index:200;width:84px;height:84px;margin:-42px 0 0 -42px;border-radius:50%;pointer-events:none;mix-blend-mode:multiply;
+    background:radial-gradient(circle,rgba(255,110,170,.30),transparent 68%);transition:width .2s,height .2s,margin .2s}
+  .night #glow{mix-blend-mode:screen;background:radial-gradient(circle,rgba(190,205,255,.40),transparent 68%)}
+  body:has(:is(a,button,summary,.jump,.play,.stage canvas,.tags span,.award,.card,.sun,.tile):hover) #glow{width:130px;height:130px;margin:-65px 0 0 -65px;background:radial-gradient(circle,rgba(255,80,150,.46),transparent 68%)}
+  .night body:has(:is(a,button,summary,.jump,.play,.stage canvas,.tags span,.award,.card,.sun,.tile):hover) #glow{background:radial-gradient(circle,rgba(215,225,255,.58),transparent 68%)}
+  .btn:hover,.looks button:hover,body>nav ul a:hover,.mode:hover,.arrow:hover,.toolbox summary:hover{box-shadow:0 0 0 3px rgba(255,120,175,.45),0 0 24px 6px rgba(255,90,160,.6)!important}
+  .night .btn:hover,.night .looks button:hover,.night body>nav ul a:hover,.night .mode:hover,.night .arrow:hover,.night .toolbox summary:hover{box-shadow:0 0 0 3px rgba(200,210,255,.45),0 0 24px 6px rgba(180,195,255,.65)!important}
+  .tile:hover,.card:hover{box-shadow:0 0 28px 6px rgba(255,90,160,.55)!important}
+  .night .tile:hover,.night .card:hover{box-shadow:0 0 28px 6px rgba(180,195,255,.6)!important}
+}
+/* ---------- tap strawberry for phones ---------- */
+.tap{position:fixed;z-index:210;width:96px;height:96px;margin:-48px 0 0 -48px;border-radius:50%;pointer-events:none;display:grid;place-items:center;
+  background:radial-gradient(circle,rgba(255,80,150,.55),rgba(255,130,180,.22) 45%,transparent 70%);animation:tapglow .65s ease-out forwards}
+.tap img{width:40px;height:auto;animation:tapberry .65s cubic-bezier(.3,1.7,.5,1) forwards}
+.night .tap{background:radial-gradient(circle,rgba(215,225,255,.62),rgba(190,205,255,.24) 45%,transparent 70%)}
+.night .tap img{filter:brightness(1.12) drop-shadow(0 0 8px rgba(215,225,255,.95))}
+@keyframes tapglow{0%{scale:.4;opacity:0}25%{opacity:1}100%{scale:1.35;opacity:0}}
+@keyframes tapberry{0%{transform:scale(.3) rotate(-30deg)}45%{transform:scale(1.15) rotate(10deg)}100%{transform:translateY(-22px) scale(.85) rotate(0)}}
 </style>
 <script src="mode.js"></script>
 <link rel="icon" type="image/png" href="media/favicon.png">
@@ -387,6 +434,103 @@ body{-webkit-touch-callout:none}
 <link rel="preload" as="image" href="media/strawberry.webp">
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="glass-pink" x="-25%" y="-35%" width="150%" height="180%" color-interpolation-filters="sRGB">
+  <feFlood flood-color="#ff5f98" flood-opacity=".55"/><feComposite in2="SourceAlpha" operator="in" result="body"/>
+  <feMorphology in="SourceAlpha" operator="erode" radius="2.6" result="core"/>
+  <feComposite in="SourceAlpha" in2="core" operator="out" result="edge"/><feGaussianBlur in="edge" stdDeviation="1.1" result="softedge"/>
+  <feFlood flood-color="#a80848"/><feComposite in2="softedge" operator="in"/><feComposite in2="SourceAlpha" operator="in" result="rim"/>
+  <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="soft"/>
+  <feOffset in="soft" dx="-3" dy="-6" result="up"/><feComposite in="SourceAlpha" in2="up" operator="out" result="low"/>
+  <feGaussianBlur in="low" stdDeviation="2.2" result="lowsoft"/>
+  <feFlood flood-color="#ffd3e4"/><feComposite in2="lowsoft" operator="in"/><feComposite in2="SourceAlpha" operator="in" result="pool"/>
+  <feSpecularLighting in="soft" surfaceScale="9" specularConstant="1.25" specularExponent="22" lighting-color="#ffffff" result="spec">
+    <feDistantLight azimuth="240" elevation="42"/>
+  </feSpecularLighting>
+  <feComposite in="spec" in2="SourceAlpha" operator="in" result="shine"/>
+  <feOffset in="SourceAlpha" dx="0" dy="9" result="drop"/><feGaussianBlur in="drop" stdDeviation="6" result="dropsoft"/>
+  <feFlood flood-color="#a80848" flood-opacity=".38"/><feComposite in2="dropsoft" operator="in"/><feComposite in2="SourceAlpha" operator="out" result="shadow"/>
+  <feMerge><feMergeNode in="shadow"/><feMergeNode in="body"/><feMergeNode in="pool"/><feMergeNode in="rim"/><feMergeNode in="shine"/></feMerge>
+</filter><filter id="glass-ink" x="-25%" y="-35%" width="150%" height="180%" color-interpolation-filters="sRGB">
+  <feFlood flood-color="#a04a78" flood-opacity=".62"/><feComposite in2="SourceAlpha" operator="in" result="body"/>
+  <feMorphology in="SourceAlpha" operator="erode" radius="1.6" result="core"/>
+  <feComposite in="SourceAlpha" in2="core" operator="out" result="edge"/><feGaussianBlur in="edge" stdDeviation="1.1" result="softedge"/>
+  <feFlood flood-color="#3a0f26"/><feComposite in2="softedge" operator="in"/><feComposite in2="SourceAlpha" operator="in" result="rim"/>
+  <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="soft"/>
+  <feOffset in="soft" dx="-3" dy="-6" result="up"/><feComposite in="SourceAlpha" in2="up" operator="out" result="low"/>
+  <feGaussianBlur in="low" stdDeviation="2.2" result="lowsoft"/>
+  <feFlood flood-color="#ffe0ee"/><feComposite in2="lowsoft" operator="in"/><feComposite in2="SourceAlpha" operator="in" result="pool"/>
+  <feSpecularLighting in="soft" surfaceScale="9" specularConstant="1.25" specularExponent="22" lighting-color="#ffffff" result="spec">
+    <feDistantLight azimuth="240" elevation="42"/>
+  </feSpecularLighting>
+  <feComposite in="spec" in2="SourceAlpha" operator="in" result="shine"/>
+  <feOffset in="SourceAlpha" dx="0" dy="9" result="drop"/><feGaussianBlur in="drop" stdDeviation="6" result="dropsoft"/>
+  <feFlood flood-color="#3a0f26" flood-opacity=".38"/><feComposite in2="dropsoft" operator="in"/><feComposite in2="SourceAlpha" operator="out" result="shadow"/>
+  <feMerge><feMergeNode in="shadow"/><feMergeNode in="body"/><feMergeNode in="pool"/><feMergeNode in="rim"/><feMergeNode in="shine"/></feMerge>
+</filter><filter id="glass-night" x="-25%" y="-35%" width="150%" height="180%" color-interpolation-filters="sRGB">
+  <feFlood flood-color="#ff9db5" flood-opacity=".4"/><feComposite in2="SourceAlpha" operator="in" result="body"/>
+  <feMorphology in="SourceAlpha" operator="erode" radius="2.6" result="core"/>
+  <feComposite in="SourceAlpha" in2="core" operator="out" result="edge"/><feGaussianBlur in="edge" stdDeviation="1.1" result="softedge"/>
+  <feFlood flood-color="#ffd9e6"/><feComposite in2="softedge" operator="in"/><feComposite in2="SourceAlpha" operator="in" result="rim"/>
+  <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="soft"/>
+  <feOffset in="soft" dx="-3" dy="-6" result="up"/><feComposite in="SourceAlpha" in2="up" operator="out" result="low"/>
+  <feGaussianBlur in="low" stdDeviation="2.2" result="lowsoft"/>
+  <feFlood flood-color="#ffffff"/><feComposite in2="lowsoft" operator="in"/><feComposite in2="SourceAlpha" operator="in" result="pool"/>
+  <feSpecularLighting in="soft" surfaceScale="9" specularConstant="1.25" specularExponent="22" lighting-color="#ffffff" result="spec">
+    <feDistantLight azimuth="240" elevation="42"/>
+  </feSpecularLighting>
+  <feComposite in="spec" in2="SourceAlpha" operator="in" result="shine"/>
+  <feOffset in="SourceAlpha" dx="0" dy="9" result="drop"/><feGaussianBlur in="drop" stdDeviation="6" result="dropsoft"/>
+  <feFlood flood-color="#ffd9e6" flood-opacity=".38"/><feComposite in2="dropsoft" operator="in"/><feComposite in2="SourceAlpha" operator="out" result="shadow"/>
+  <feMerge><feMergeNode in="shadow"/><feMergeNode in="body"/><feMergeNode in="pool"/><feMergeNode in="rim"/><feMergeNode in="shine"/></feMerge>
+</filter><filter id="glass-pink-sm" x="-25%" y="-35%" width="150%" height="180%" color-interpolation-filters="sRGB">
+  <feFlood flood-color="#ff5f98" flood-opacity=".55"/><feComposite in2="SourceAlpha" operator="in" result="body"/>
+  <feMorphology in="SourceAlpha" operator="erode" radius="1.17" result="core"/>
+  <feComposite in="SourceAlpha" in2="core" operator="out" result="edge"/><feGaussianBlur in="edge" stdDeviation="0.50" result="softedge"/>
+  <feFlood flood-color="#a80848"/><feComposite in2="softedge" operator="in"/><feComposite in2="SourceAlpha" operator="in" result="rim"/>
+  <feGaussianBlur in="SourceAlpha" stdDeviation="2.25" result="soft"/>
+  <feOffset in="soft" dx="-1.35" dy="-2.70" result="up"/><feComposite in="SourceAlpha" in2="up" operator="out" result="low"/>
+  <feGaussianBlur in="low" stdDeviation="0.99" result="lowsoft"/>
+  <feFlood flood-color="#ffd3e4"/><feComposite in2="lowsoft" operator="in"/><feComposite in2="SourceAlpha" operator="in" result="pool"/>
+  <feSpecularLighting in="soft" surfaceScale="4.05" specularConstant="1.25" specularExponent="22" lighting-color="#ffffff" result="spec">
+    <feDistantLight azimuth="240" elevation="42"/>
+  </feSpecularLighting>
+  <feComposite in="spec" in2="SourceAlpha" operator="in" result="shine"/>
+  <feOffset in="SourceAlpha" dx="0.00" dy="4.05" result="drop"/><feGaussianBlur in="drop" stdDeviation="2.70" result="dropsoft"/>
+  <feFlood flood-color="#a80848" flood-opacity=".38"/><feComposite in2="dropsoft" operator="in"/><feComposite in2="SourceAlpha" operator="out" result="shadow"/>
+  <feMerge><feMergeNode in="shadow"/><feMergeNode in="body"/><feMergeNode in="pool"/><feMergeNode in="rim"/><feMergeNode in="shine"/></feMerge>
+</filter><filter id="glass-ink-sm" x="-25%" y="-35%" width="150%" height="180%" color-interpolation-filters="sRGB">
+  <feFlood flood-color="#a04a78" flood-opacity=".62"/><feComposite in2="SourceAlpha" operator="in" result="body"/>
+  <feMorphology in="SourceAlpha" operator="erode" radius="0.72" result="core"/>
+  <feComposite in="SourceAlpha" in2="core" operator="out" result="edge"/><feGaussianBlur in="edge" stdDeviation="0.50" result="softedge"/>
+  <feFlood flood-color="#3a0f26"/><feComposite in2="softedge" operator="in"/><feComposite in2="SourceAlpha" operator="in" result="rim"/>
+  <feGaussianBlur in="SourceAlpha" stdDeviation="2.25" result="soft"/>
+  <feOffset in="soft" dx="-1.35" dy="-2.70" result="up"/><feComposite in="SourceAlpha" in2="up" operator="out" result="low"/>
+  <feGaussianBlur in="low" stdDeviation="0.99" result="lowsoft"/>
+  <feFlood flood-color="#ffe0ee"/><feComposite in2="lowsoft" operator="in"/><feComposite in2="SourceAlpha" operator="in" result="pool"/>
+  <feSpecularLighting in="soft" surfaceScale="4.05" specularConstant="1.25" specularExponent="22" lighting-color="#ffffff" result="spec">
+    <feDistantLight azimuth="240" elevation="42"/>
+  </feSpecularLighting>
+  <feComposite in="spec" in2="SourceAlpha" operator="in" result="shine"/>
+  <feOffset in="SourceAlpha" dx="0.00" dy="4.05" result="drop"/><feGaussianBlur in="drop" stdDeviation="2.70" result="dropsoft"/>
+  <feFlood flood-color="#3a0f26" flood-opacity=".38"/><feComposite in2="dropsoft" operator="in"/><feComposite in2="SourceAlpha" operator="out" result="shadow"/>
+  <feMerge><feMergeNode in="shadow"/><feMergeNode in="body"/><feMergeNode in="pool"/><feMergeNode in="rim"/><feMergeNode in="shine"/></feMerge>
+</filter><filter id="glass-night-sm" x="-25%" y="-35%" width="150%" height="180%" color-interpolation-filters="sRGB">
+  <feFlood flood-color="#ff9db5" flood-opacity=".4"/><feComposite in2="SourceAlpha" operator="in" result="body"/>
+  <feMorphology in="SourceAlpha" operator="erode" radius="1.17" result="core"/>
+  <feComposite in="SourceAlpha" in2="core" operator="out" result="edge"/><feGaussianBlur in="edge" stdDeviation="0.50" result="softedge"/>
+  <feFlood flood-color="#ffd9e6"/><feComposite in2="softedge" operator="in"/><feComposite in2="SourceAlpha" operator="in" result="rim"/>
+  <feGaussianBlur in="SourceAlpha" stdDeviation="2.25" result="soft"/>
+  <feOffset in="soft" dx="-1.35" dy="-2.70" result="up"/><feComposite in="SourceAlpha" in2="up" operator="out" result="low"/>
+  <feGaussianBlur in="low" stdDeviation="0.99" result="lowsoft"/>
+  <feFlood flood-color="#ffffff"/><feComposite in2="lowsoft" operator="in"/><feComposite in2="SourceAlpha" operator="in" result="pool"/>
+  <feSpecularLighting in="soft" surfaceScale="4.05" specularConstant="1.25" specularExponent="22" lighting-color="#ffffff" result="spec">
+    <feDistantLight azimuth="240" elevation="42"/>
+  </feSpecularLighting>
+  <feComposite in="spec" in2="SourceAlpha" operator="in" result="shine"/>
+  <feOffset in="SourceAlpha" dx="0.00" dy="4.05" result="drop"/><feGaussianBlur in="drop" stdDeviation="2.70" result="dropsoft"/>
+  <feFlood flood-color="#ffd9e6" flood-opacity=".38"/><feComposite in2="dropsoft" operator="in"/><feComposite in2="SourceAlpha" operator="out" result="shadow"/>
+  <feMerge><feMergeNode in="shadow"/><feMergeNode in="body"/><feMergeNode in="pool"/><feMergeNode in="rim"/><feMergeNode in="shine"/></feMerge>
+</filter></svg>
 <div id="loader" role="status"><img src="media/strawberry.webp" alt="" width="90"><p>picking strawberries...</p></div>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="berry" viewBox="0 0 60 68">
 <path d="M30 66C14 58 3 40 5 25 7 13 20 12 30 18 40 12 53 13 55 25 57 40 46 58 30 66Z" fill="#e8315f"/>
@@ -492,7 +636,7 @@ body{-webkit-touch-callout:none}
 <section id="contact">
   <div class="postcard reveal">
     <h2>say hi! <img class="doodle" src="media/strawberry.webp" alt=""></h2>
-    <p>Job opportunities, collabs, or just cool stuff. I'm in Baguio City and open to remote work.</p>
+    <p>Job opportunities, collabs, or just cool stuff. I'm based in Baguio City and open to remote work.</p>
     <div class="links">
       <a class="btn main" href="https://mail.google.com/mail/?view=cm&fs=1&to=yasmienjengayao@gmail.com" target="_blank" rel="noopener noreferrer">✉ email me</a>
       <button type="button" class="btn copy" data-copy="yasmienjengayao@gmail.com">📋 copy my email</button>
@@ -503,7 +647,7 @@ body{-webkit-touch-callout:none}
 <footer>drawn, modelled &amp; made by Yasmien · 2026</footer>
 
 <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" integrity="sha384-61S/Nu32S3E5+n+KpCOTb2eRYps6fVKm+9Gz1QBvSePFthb46f063Aa/qe/lykFZ" crossorigin="anonymous">
-<script type="module" src="cat.js?v=31"></script>
-<script src="site.js?v=3"></script>
+<script type="module" src="cat.js?v=32"></script>
+<script src="site.js?v=6"></script>
 </body>
 </html>
