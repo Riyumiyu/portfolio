@@ -185,3 +185,29 @@ document.addEventListener("pointerup", e => {
   document.body.append(tap);
   setTimeout(() => tap.remove(), 650);
 });
+
+// phones: the showreel is landscape, so open it big instead of inside its small card
+const small = matchMedia("(max-width: 720px), (pointer: coarse) and (max-height: 500px)");
+document.addEventListener("click", e => {
+  const play = e.target.closest("#edits .play");
+  if (!play || !small.matches) return;
+  e.stopImmediatePropagation();
+  const id = new URL(play.querySelector("img").src).searchParams.get("id");
+  const view = Object.assign(document.createElement("div"), {className: "theatre"});
+  view.setAttribute("role", "dialog");
+  view.setAttribute("aria-label", "AI showreel");
+  const screen = Object.assign(document.createElement("div"), {className: "screen"});
+  const close = Object.assign(document.createElement("button"), {type: "button", className: "shut", textContent: "✕ close"});
+  screen.append(
+    Object.assign(document.createElement("iframe"), {src: `https://drive.google.com/file/d/${id}/preview`, allow: "autoplay; fullscreen 'none'", title: "AI showreel"}),
+    Object.assign(document.createElement("span"), {className: "shield"}),
+    Object.assign(document.createElement("span"), {className: "wm", textContent: "made by Yasmien 🍓"}));
+  view.append(screen, close);
+  const end = () => { view.remove(); document.body.style.overflow = ""; removeEventListener("keydown", key); play.focus(); };
+  const key = k => k.key === "Escape" && end();
+  close.addEventListener("click", end);
+  addEventListener("keydown", key);
+  document.body.style.overflow = "hidden";
+  document.body.append(view);
+  close.focus();
+}, true);
