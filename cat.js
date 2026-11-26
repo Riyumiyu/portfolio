@@ -98,6 +98,47 @@ function licenseMark() {
   return mark;
 }
 
+// repaint her by what each vertex was: body, leaf, face or cheek
+function flavours(geo) {
+  const attr = geo.attributes.color, pos = geo.attributes.position;
+  const base = attr.array.slice(), height = pos.array.slice(), c = new THREE.Color();
+  const hex = h => new THREE.Color(h);
+  const sets = {
+    matcha: { body: hex("#a9cf7e"), leaf: hex("#4f8a45"), face: hex("#3f5a23"), cheek: hex("#ffc2d1") },
+    blueberry: { body: hex("#9fb0ff"), leaf: hex("#4fae86"), face: hex("#2c2f78"), cheek: hex("#ff9db5") },
+  };
+  const choco = hex("#6b3526"), drizzle = hex("#fff6f4");
+  const part = i => {
+    c.fromArray(base, i * 3).convertLinearToSRGB();
+    if (c.g > c.r) return "leaf";
+    if (c.r > .58 && c.g < .3) return "face";
+    if (c.r > .78 && c.g > .62 && c.g - c.b > .1) return "cheek";
+    return "body";
+  };
+  const parts = Array.from({ length: attr.count }, (_, i) => part(i));
+  return name => {
+    attr.array.set(base);
+    for (let i = 0; i < attr.count; i++) {
+      const x = height[i * 3], y = height[i * 3 + 1], z = height[i * 3 + 2];
+      if (sets[name]) sets[name][parts[i]].toArray(attr.array, i * 3);
+      if (name === "choco" && parts[i] === "body") { // dipped from the feet up, with a drippy edge
+        const around = Math.atan2(x, z), edge = .66 + .05 * Math.sin(around * 7) + .03 * Math.sin(around * 17);
+        if (y < edge) (y > edge - .035 ? drizzle : choco).toArray(attr.array, i * 3);
+      }
+    }
+    attr.needsUpdate = true;
+  };
+}
+
+// flat comic shading with an ink line around her
+function cartoon(geo) {
+  const steps = new THREE.DataTexture(new Uint8Array([150, 215, 255]), 3, 1, THREE.RedFormat);
+  steps.needsUpdate = true;
+  const ink = new THREE.MeshBasicMaterial({ color: 0x4a1830, side: THREE.BackSide });
+  ink.onBeforeCompile = shader => shader.vertexShader = shader.vertexShader.replace("#include <begin_vertex>", "vec3 transformed = position + normalize(normal) * .016;");
+  return { paint: new THREE.MeshToonMaterial({ vertexColors: true, gradientMap: steps }), line: new THREE.Mesh(geo, ink) };
+}
+
 function stage(el, source) {
   const geo = source.clone(), pose = rigArms(geo);
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -113,12 +154,11 @@ function stage(el, source) {
 
   // soft vinyl-toy finish
   const toy = new THREE.MeshPhysicalMaterial({ vertexColors: true, roughness: .42, clearcoat: .55, clearcoatRoughness: .3 });
-  const clay = new THREE.MeshStandardMaterial({ color: 0xe9dfe3, roughness: .95 });
 
   const cat = new THREE.Mesh(geo, toy), rig = new THREE.Group();
-  const dots = new THREE.Points(geo, new THREE.PointsMaterial({ vertexColors: true, size: .011 }));
-  dots.visible = false;
-  rig.add(cat, dots, licenseMark()); scene.add(rig);
+  const comic = cartoon(geo), repaint = flavours(geo);
+  comic.line.visible = false;
+  rig.add(cat, comic.line, licenseMark()); scene.add(rig);
   const shadow = new THREE.Mesh(new THREE.PlaneGeometry(2, 1.4), new THREE.MeshBasicMaterial({ map: shadowTexture(), transparent: true, depthWrite: false }));
   shadow.rotation.x = -Math.PI / 2; scene.add(shadow);
 
@@ -227,15 +267,21 @@ function stage(el, source) {
     ['a[href="#about"]', ["wave"], ["back to the garden!", "hello again 👋"], "🍓"],
     ['a[href="#contact"], a[href^="mailto"], a[href^="tel"], a[href*="linkedin"]', ["wave", "bow"], ["say hello! 💌", "she replies fast!", "let's talk ☎️"], "💌"],
     ['a[href*="drive.google"]', ["bow", "cheer"], ["thanks! 💗", "good choice!", "enjoy reading 📖"], "💗"],
-    ['[data-look="clay"]', ["wiggle"], ["I feel squishy", "unpainted me!"], "🤍"],
-    ['[data-look="dots"]', ["spin"], ["I'm sparkles!", "beam me up ✨"], "✨"],
-    ['[data-look="toy"]', ["cheer"], ["shiny again!", "much better 🍓"], "🍓"],
+    ['[data-look="toy"]', ["cheer"], ["classic me! 🍓", "much better!"], "🍓"],
+    ['[data-look="matcha"]', ["wiggle"], ["matcha mood 🍵", "so green!"], "🍵"],
+    ['[data-look="choco"]', ["bounce"], ["choco dipped! 🍫", "don't bite me!"], "🍫"],
+    ['[data-look="blueberry"]', ["spin"], ["blueberry cat?! 🫐", "brr, blue!"], "🫐"],
+    ['[data-look="comic"]', ["peek"], ["i'm a cartoon! ✏️", "drawn like this"], "✨"],
     ['[data-key="digiart"]', ["clap"], ["2nd place! 🥈"], "🥈"],
     ['[data-key="animation"]', ["dance"], ["I can move too!"], "🎞️"],
     ['[data-key="libratech"]', ["nod"], ["shh... library 📚"], "📚"],
     ['[data-key="photo"]', ["peek"], ["say cheese! 📸"], "📸"],
     ['[data-key="game"]', ["bounce"], ["let's play! 🎮"], "🎮"],
     ['[data-key="thesis"]', ["cheer"], ["defended it! 🎓"], "🎓"],
+    ["#designs [data-item]", ["peek", "bounce"], ["spin it around!", "ooh, packaging! 📦", "so shiny!"], "🍓"],
+    ["#designs .piece", ["clap", "cheer"], ["look closer! 🔍", "that's my face! 🍓"], "🎨"],
+    ["#designs canvas", ["wiggle", "bounce"], ["wheee, spinning!", "turn me around!"], "✨"],
+    ['.theatre, .shut', ["wave"], ["enjoy the show! 🎬"], "🎬"],
     [".sun", ["peek", "wave"], ["too bright! 😎", "hi sunny Yas ☀️"], "☀️"],
     [".tags span", ["nod", "wiggle"], ["she's good at that", "yep, yep!", "skill unlocked ✨"], "✨"],
     [".award", ["clap", "cheer"], ["wow, a winner!", "so proud!"], "🏅"],
@@ -245,7 +291,8 @@ function stage(el, source) {
     [".tile", ["peek", "bounce"], ["ooh, nice one!", "she made that! ✨", "play it again!"], "🍓"],
     ["h1, h2", ["wiggle", "bow"], ["that's the title!", "nice font, right?"], "💗"],
     [".toolbox", ["cheer", "dance"], ["my AI toolkit! 🤖", "so many tools!"], "🤖"],
-    ["a, button", ["hop", "nod"], ["okay!", "this way ➡️"], "🍓"],
+    ['a[href^="#"]', ["hop", "nod"], ["off we go!", "follow me! 🍓"], "🍓"],
+    ["a, button", ["hop", "nod"], ["okay!", "got it!"], "🍓"],
   ];
   const turns = new Map(), pick = (list, n) => list[n % list.length];
   el.addEventListener("contextmenu", e => e.preventDefault()); // no "save image" on the cat
@@ -270,8 +317,10 @@ function stage(el, source) {
   if (el.hasAttribute("data-walk")) setTimeout(() => act("wave", "hello! 👋"), 700); // greets you at the start
 
   return name => {
-    dots.visible = name === "dots"; cat.visible = !dots.visible;
-    cat.material = name === "clay" ? clay : toy;
+    repaint(name);
+    comic.line.visible = name === "comic";
+    cat.material = name === "comic" ? comic.paint : toy;
+    jumpAt = performance.now() / 1000;
   };
 }
 
