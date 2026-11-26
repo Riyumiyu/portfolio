@@ -4,7 +4,7 @@ const viewer = section.querySelector(".viewer");
 const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 // bigger view of a flat piece
-section.querySelectorAll(".piece button").forEach(button => button.addEventListener("click", () => {
+section.querySelectorAll(".piece button, .slide button.big").forEach(button => button.addEventListener("click", () => {
   const view = Object.assign(document.createElement("div"), {className: "zoom"});
   view.setAttribute("role", "dialog");
   view.setAttribute("aria-label", button.querySelector("img").alt);
@@ -19,6 +19,40 @@ section.querySelectorAll(".piece button").forEach(button => button.addEventListe
   document.body.append(view);
   close.focus();
 }));
+
+// the two social carousels move together: one pair of arrows, or swipe either one
+const tracks = [...section.querySelectorAll(".track")];
+const dots = [...section.querySelectorAll(".dots i")];
+const at = track => Math.round(track.scrollLeft / track.clientWidth);
+const mark = n => dots.forEach((d, i) => d.classList.toggle("on", i === n));
+let slide = 0, settle;
+const show_slide = (n, except) => {
+  slide = (n + dots.length) % dots.length; // wraps round at both ends
+  tracks.forEach(t => t !== except && t.scrollTo({left: slide * t.clientWidth, behavior: calm ? "auto" : "smooth"}));
+  mark(slide);
+};
+section.querySelector(".turn.prev").addEventListener("click", () => show_slide(slide - 1));
+section.querySelector(".turn.next").addEventListener("click", () => show_slide(slide + 1));
+tracks.forEach(track => {
+  // a swipe moves one carousel; once it comes to rest the other follows
+  let swiped = false;
+  const own = () => swiped = true;
+  track.addEventListener("pointerdown", own, {passive: true});
+  track.addEventListener("wheel", own, {passive: true});
+  track.addEventListener("touchstart", own, {passive: true});
+  track.addEventListener("scroll", () => {
+    if (!swiped) return;
+    clearTimeout(settle);
+    settle = setTimeout(() => { swiped = false; show_slide(at(track), track); }, 160);
+  }, {passive: true});
+  track.addEventListener("keydown", e => {
+    if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+    e.preventDefault();
+    show_slide(slide + (e.key === "ArrowLeft" ? -1 : 1));
+  });
+});
+addEventListener("resize", () => tracks.forEach(t => t.scrollTo({left: slide * t.clientWidth})));
+mark(0);
 
 async function start() {
   const THREE = await import("https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js");

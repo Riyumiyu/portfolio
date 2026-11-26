@@ -279,6 +279,7 @@ function stage(el, source) {
     ['[data-key="game"]', ["bounce"], ["let's play! 🎮"], "🎮"],
     ['[data-key="thesis"]', ["cheer"], ["defended it! 🎓"], "🎓"],
     ["#designs [data-item]", ["peek", "bounce"], ["spin it around!", "ooh, packaging! 📦", "so shiny!"], "🍓"],
+    ["#designs .food", ["cheer", "bounce"], ["yum! 🍰", "is that for me?", "i had to check one."], "🍰"],
     ["#designs .piece", ["clap", "cheer"], ["look closer! 🔍", "that's my face! 🍓"], "🎨"],
     ["#designs canvas", ["wiggle", "bounce"], ["wheee, spinning!", "turn me around!"], "✨"],
     ['.theatre, .shut', ["wave"], ["enjoy the show! 🎬"], "🎬"],

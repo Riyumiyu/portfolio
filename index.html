@@ -467,6 +467,23 @@ body{-webkit-touch-callout:none}
 @media(max-width:720px){.jumps .jump:nth-child(1){left:15%!important;bottom:2%!important}.jumps .jump:nth-child(2){left:32%!important;bottom:17%!important}.jumps .jump:nth-child(3){left:50%!important;bottom:2%!important}.jumps .jump:nth-child(4){left:68%!important;bottom:17%!important}.jumps .jump:nth-child(5){left:85%!important;bottom:2%!important}.jumps .jump:nth-child(6){left:85%!important;bottom:34%!important}}
 #designs .piece.wide{width:426px}#designs .piece.wide img{aspect-ratio:3500/2475}
 @media(max-width:720px){#designs .piece.wide{width:100%}}
+#designs .sublabel{margin:46px 0 0;text-align:center;font:2rem Caveat,cursive;color:var(--on)}
+#designs .sublabel small{display:block;font:1.05rem "Patrick Hand",cursive}
+#designs .posts{position:relative;display:flex;justify-content:center;align-items:flex-start;gap:26px;max-width:786px;margin:20px auto 0}
+#designs .post{flex:1 1 0;min-width:0;max-width:380px}
+#designs .post h4{margin:0 0 10px;text-align:center;font:700 1.8rem Caveat,cursive;color:var(--on)}
+#designs .track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;border-radius:22px;border:3px solid #4a1830;box-shadow:6px 6px 0 #4a1830;background:#fffdfb}
+#designs .track::-webkit-scrollbar{display:none}
+#designs .slide{flex:0 0 100%;scroll-snap-align:center}
+#designs .slide button{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in}
+#designs .slide img{display:block;width:100%;height:auto;pointer-events:none}
+#designs .turn{position:absolute;z-index:2;top:calc(50% + 20px);translate:0 -50%;width:44px;height:44px;border-radius:50%;border:3px solid #4a1830;background:#ffc75a;color:#4a1830;font:800 1.6rem/1 Nunito,sans-serif;cursor:pointer}
+#designs .turn.prev{left:-22px}#designs .turn.next{right:-22px}
+#designs .dots{display:flex;justify-content:center;gap:9px;margin-top:18px}
+#designs .dots i{width:11px;height:11px;border-radius:50%;background:var(--on);opacity:.3}
+#designs .dots i.on{opacity:1}
+@media(max-width:720px){#designs .posts{gap:10px}#designs .post h4{font-size:1.35rem}#designs .track{border-radius:12px;box-shadow:3px 3px 0 #4a1830}
+  #designs .turn{width:36px;height:36px;font-size:1.3rem}#designs .turn.prev{left:-14px}#designs .turn.next{right:-14px}}
 .zoom{position:fixed;inset:0;z-index:220;background:rgba(40,8,24,.9);display:grid;place-items:center;padding:56px 14px 14px}
 .zoom img{max-width:100%;max-height:calc(100vh - 80px);border-radius:14px;pointer-events:auto}
 .zoom button{position:absolute;right:12px;top:10px;font:800 .95rem Nunito,sans-serif;padding:9px 16px;border-radius:99px;border:1px solid #fff;background:#c90a56;color:#fff;cursor:pointer}
@@ -641,6 +658,38 @@ body{-webkit-touch-callout:none}
     <figure class="piece wide"><button type="button" aria-label="see loyalty card bigger"><img src="media/design-card.webp" alt="Strawberry Cat Café die-cut loyalty card, front and back" width="1600" height="1131" loading="lazy" draggable="false"></button><figcaption><b>loyalty card</b> wake the owner, one drink at a time</figcaption></figure>
     <figure class="piece wide"><button type="button" aria-label="see brand guide bigger"><img src="media/design-handbook.webp" alt="Strawberry Cat Café brand guide as a staff handbook" width="1600" height="1131" loading="lazy" draggable="false"></button><figcaption><b>brand guide</b> the staff handbook</figcaption></figure>
   </div>
+  <h3 class="sublabel">social media carousels <small>swipe through · a practice project, made with ai, directed by me</small></h3>
+  <div class="posts">
+    <button type="button" class="turn prev" aria-label="previous slide, both carousels">‹</button>
+    <div class="post">
+      <h4>drawn</h4>
+      <div class="carousel">
+        <div class="track" tabindex="0">
+        <div class="slide"><button type="button" class="big" aria-label="see slide 1 bigger"><img src="media/social-drawn-1.webp" alt="Slide 1 of 6, cover: I took over the café's page" width="864" height="1080" loading="lazy" draggable="false"></button></div>
+        <div class="slide food"><button type="button" class="big" aria-label="see slide 2 bigger"><img src="media/social-drawn-2.webp" alt="Slide 2 of 6, Strawberry Milk" width="864" height="1080" loading="lazy" draggable="false"></button></div>
+        <div class="slide food"><button type="button" class="big" aria-label="see slide 3 bigger"><img src="media/social-drawn-3.webp" alt="Slide 3 of 6, Cat Nap Latte" width="864" height="1080" loading="lazy" draggable="false"></button></div>
+        <div class="slide food"><button type="button" class="big" aria-label="see slide 4 bigger"><img src="media/social-drawn-4.webp" alt="Slide 4 of 6, Strawberry Shortcake" width="864" height="1080" loading="lazy" draggable="false"></button></div>
+        <div class="slide food"><button type="button" class="big" aria-label="see slide 5 bigger"><img src="media/social-drawn-5.webp" alt="Slide 5 of 6, Berry Mochi, sold out" width="864" height="1080" loading="lazy" draggable="false"></button></div>
+        <div class="slide"><button type="button" class="big" aria-label="see slide 6 bigger"><img src="media/social-drawn-6.webp" alt="Slide 6 of 6, your order vs. my mood" width="864" height="1080" loading="lazy" draggable="false"></button></div>
+        </div>
+      </div>
+    </div>
+    <div class="post">
+      <h4>with real photos</h4>
+      <div class="carousel">
+        <div class="track" tabindex="0">
+        <div class="slide"><button type="button" class="big" aria-label="see slide 1 bigger"><img src="media/social-drawn-1.webp" alt="Slide 1 of 6, cover: I took over the café's page" width="864" height="1080" loading="lazy" draggable="false"></button></div>
+        <div class="slide food"><button type="button" class="big" aria-label="see slide 2 bigger"><img src="media/social-real-2.webp" alt="Slide 2 of 6, Strawberry Milk" width="864" height="1080" loading="lazy" draggable="false"></button></div>
+        <div class="slide food"><button type="button" class="big" aria-label="see slide 3 bigger"><img src="media/social-real-3.webp" alt="Slide 3 of 6, Cat Nap Latte" width="864" height="1080" loading="lazy" draggable="false"></button></div>
+        <div class="slide food"><button type="button" class="big" aria-label="see slide 4 bigger"><img src="media/social-real-4.webp" alt="Slide 4 of 6, Strawberry Shortcake" width="864" height="1080" loading="lazy" draggable="false"></button></div>
+        <div class="slide food"><button type="button" class="big" aria-label="see slide 5 bigger"><img src="media/social-real-5.webp" alt="Slide 5 of 6, Berry Mochi, sold out" width="864" height="1080" loading="lazy" draggable="false"></button></div>
+        <div class="slide"><button type="button" class="big" aria-label="see slide 6 bigger"><img src="media/social-drawn-6.webp" alt="Slide 6 of 6, your order vs. my mood" width="864" height="1080" loading="lazy" draggable="false"></button></div>
+        </div>
+      </div>
+    </div>
+    <button type="button" class="turn next" aria-label="next slide, both carousels">›</button>
+  </div>
+  <div class="dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
 </section>
 
 <section id="cat">
@@ -706,8 +755,8 @@ body{-webkit-touch-callout:none}
 <footer>drawn, modelled &amp; made by Yasmien · 2026</footer>
 
 <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" integrity="sha384-61S/Nu32S3E5+n+KpCOTb2eRYps6fVKm+9Gz1QBvSePFthb46f063Aa/qe/lykFZ" crossorigin="anonymous">
-<script type="module" src="cat.js?v=34"></script>
+<script type="module" src="cat.js?v=35"></script>
 <script src="site.js?v=7"></script>
-<script type="module" src="designs.js?v=1"></script>
+<script type="module" src="designs.js?v=4"></script>
 </body>
 </html>
